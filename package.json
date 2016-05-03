@@ -1,0 +1,15 @@
+{
+  "name": "crypt",
+  "version": "1.0.0",
+  "description": "Simple crypto functions.",
+  "keywords": [
+    "cryptographic",
+    "encryption"
+  ],
+  "main": "crypt.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "kelvinm",
+  "license": "MIT"
+}
