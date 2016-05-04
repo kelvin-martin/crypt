@@ -1,6 +1,8 @@
 # crypt
 Simple functions, using Node's crypto library, to encrypt and decrypt blocks of text. The crypt functions can be used for encrypting passwords for storage. 
 
+__This is a work in progress and a stable release is not yet available.__
+
 ###Installation
 Download the zip file from GitHub and '*extract all*' into a folder.
 
@@ -23,7 +25,9 @@ The crypt package has been tested on:
 	3. JUnit v2.0.0
 
 ###API
-All these functions operate synchronously.
+A stable release is not yet available and changes to the API __will occur__.
+
+Currently the API operates synchronously. There is an open issue to add support for asynchronous operation. This is unlikely to occur until after the first stable release.
 
 __randomPassPhrase (length)__
 
@@ -44,3 +48,6 @@ The current implementation uses Node's Advanced Encryption System AES256 algorit
 __decrypt (text, passPhrase)__
 
 Decrypts a block of previously encrypted text (__*string*__) using the supplied pass phrase (__*string*__) and returns a plain text (__*string*__) decryption. If an error occurs a null object is returned. Therefore, the return value sould always be tested for null. If a different pass phrase is used then the function will return null.
+
+###License
+Crypt is freely distributable under the terms of the MIT license.

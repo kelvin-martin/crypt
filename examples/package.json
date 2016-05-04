@@ -1,0 +1,15 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "Example node script to use crypt.",
+  "main": "example.js",
+  "scripts": {
+    "start": "node"
+  },
+  "author": "kelvinm",
+  "license": "MIT",
+  "keywords": [
+    "Example",
+    "Passwords"
+  ]
+}
