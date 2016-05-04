@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.1",
+  "description": "Test suite for crypt.",
+  "keywords": [
+    "test suite",
+    "unit testng"
+  ],
+  "main": "test.js",
+  "scripts": {
+    "start": "node ./test.js"
+  },
+  "author": "kelvinm",
+  "license": "MIT",
+  "dependencies": {
+    "unit.js": "^2.0.0"
+  },
+  "devDependencies": {}
+}

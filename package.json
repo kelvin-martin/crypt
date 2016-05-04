@@ -7,9 +7,20 @@
     "encryption"
   ],
   "main": "crypt.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelvin-martin/crypt.git"
+  },
   "scripts": {
-    "test": "node test.js"
+    "test": "node ./test/test.js"
   },
   "author": "kelvinm",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kelvin-martin/crypt/issues"
+  },
+  "homepage": "https://github.com/kelvin-martin/crypt#readme",
+  "directories": {
+    "test": "test"
+  }
 }
