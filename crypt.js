@@ -9,17 +9,28 @@ var algorithm = 'aes256';
 
 // Returns a random hex string that can be used as a pass phrase.
 // Takes an optional length parameter for the length of the pass phrase
-// length should be between 128 and 1024.
+// length should be between 32 and 1024.
 exports.randomPassPhrase = function (length) {
 	if (typeof length === 'undefined') {
     	length = 128;
-  	} else if (length < 128) {
-  		length = 128;
+  	} else if (length < 32) {
+  		length = 32;
   	} else if (length > 1024) {
   		length = 1024;
   	}
 	const buf = crypto.randomBytes(length);
 	return buf.toString('hex');
+};
+
+// Returns a hash digest string using the supplied text
+// that can be used as a pass phrase.
+exports.hashPassPhrase = function (text) {
+	const hash = crypto.createHash('sha256');
+	if (typeof text === 'undefined') {
+		text = this.randomPassPhrase();
+	}
+	hash.update(text);
+	return hash.digest('hex');
 };
 
 // Encrypts a block of text using the supplied pass phrase.

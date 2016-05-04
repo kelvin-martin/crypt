@@ -100,21 +100,21 @@ function test5() {
 		.must(passPhrase).be.a.string();
 	test
 		.string(passPhrase).isNotEmpty()
-		.number(passPhrase.length).is(256);	// Min value	
+		.number(passPhrase.length).is(64);	// Min value	
 
 	passPhrase = crypt.randomPassPhrase(0);	
 	test
 		.must(passPhrase).be.a.string();
 	test
 		.string(passPhrase).isNotEmpty()
-		.number(passPhrase.length).is(256);	// Min value
+		.number(passPhrase.length).is(64);	// Min value
 
 	passPhrase = crypt.randomPassPhrase(-234);	
 	test
 		.must(passPhrase).be.a.string();
 	test
 		.string(passPhrase).isNotEmpty()
-		.number(passPhrase.length).is(256);	// Min value
+		.number(passPhrase.length).is(64);	// Min value
 
 	passPhrase = crypt.randomPassPhrase(1024);	
 	test
@@ -129,10 +129,47 @@ function test5() {
 	test
 		.string(passPhrase).isNotEmpty()
 		.number(passPhrase.length).is(2048); // Max value	
-}
+};
 
+function test6() {
+	console.log('Test for hashPassPhrase().');
+
+	var passPhrase = crypt.hashPassPhrase("asdh wueh467d76bcr8hfs");
+
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(64); 
+
+	var passPhrase = crypt.hashPassPhrase();
+
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(64);
+
+	passPhrase = crypt.hashPassPhrase("7bcghaeq53cdb4390b0a4aef");
+	var encrypted = crypt.encrypt(plain_text, passPhrase);
+	
+	test
+		.value(encrypted).isString()
+		.string(encrypted).isNotEmpty();
+
+	var decrypted = crypt.decrypt(encrypted, passPhrase);
+
+	test
+		.value(decrypted).isString()
+		.string(decrypted).isNotEmpty()
+		.string(decrypted).is(plain_text);	
+};
+
+// Run tests
 test1();
 test2();
 test3();
 test4();
 test5();
+test6();
+// End tests
