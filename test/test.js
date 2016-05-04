@@ -24,8 +24,9 @@ function test1() {
 	var decrypted = crypt.decrypt(encrypted, passPhrase);
 
 	test
-		.value(encrypted).isString()
-		.string(encrypted).isNotEmpty();
+		.value(decrypted).isString()
+		.string(decrypted).isNotEmpty()
+		.string(decrypted).is(plain_text);
 };
 
 function test2() {
