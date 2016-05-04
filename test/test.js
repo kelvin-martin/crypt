@@ -77,7 +77,62 @@ function test4() {
 		.string(encrypted).isNotEmpty();
 };
 
+function test5() {
+	console.log('Test for handing length in randomPassPhrase().');
+
+	var passPhrase = crypt.randomPassPhrase(128);
+
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(256); // 128*2
+
+	passPhrase = crypt.randomPassPhrase(192);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(384); // 192*2
+
+	passPhrase = crypt.randomPassPhrase(1);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(256);	// Min value	
+
+	passPhrase = crypt.randomPassPhrase(0);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(256);	// Min value
+
+	passPhrase = crypt.randomPassPhrase(-234);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(256);	// Min value
+
+	passPhrase = crypt.randomPassPhrase(1024);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(2048); // 1024*2		
+
+	passPhrase = crypt.randomPassPhrase(99999999);	
+	test
+		.must(passPhrase).be.a.string();
+	test
+		.string(passPhrase).isNotEmpty()
+		.number(passPhrase.length).is(2048); // Max value	
+}
+
 test1();
 test2();
 test3();
 test4();
+test5();
