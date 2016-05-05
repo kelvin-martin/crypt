@@ -11,9 +11,8 @@ Using Node's Advanced Encryption System AES256 symetrical algorithm for encrypti
 
 crypt only depends on Node's crypto library and has no other dependancies. UnitJS is used for testing but is not required to use crypt.
 
-__This is a work in progress and a stable release is not yet available.__
 ###Installation
-crypt is not yet in the npm archives therefore download the zip file from GitHub and '*extract all*' into a folder.
+Install from GitHub by downloading the zip file and '*extract all*' into a folder.
 
 Alternatively clone from git using command:
 ```
@@ -23,7 +22,7 @@ git clone https://github.com/kelvin-martin/crypt.git
 This will install all the source files from the GitHub repo and setup a local git repo.
 
 ###API
-A stable release is not yet available and changes to the API __will occur__.
+crypt v1.1 is the first release.
 
 Currently the API operates synchronously. There is an open issue to add support for asynchronous operation. This is unlikely to occur until after the first stable release.
 ```
