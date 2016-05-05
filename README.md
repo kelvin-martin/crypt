@@ -1,4 +1,4 @@
-# crypt
+#crypt
 Simple functions, using Node's crypto library, to encrypt and decrypt blocks of text. 
 
 Storing passwords in plain-text is not a good idea. crypt makes the storing of passwords easy. The crypt functions can be used for encrypting passwords for storage and also decryption of stored passwords for later validation. 
@@ -10,7 +10,6 @@ Using Node's Advanced Encryption System AES256 symetrical algorithm for encrypti
 crypt only depends on Node's crypto library and has no other dependancies. UnitJS is used for testing but is not required to use crypt.
 
 __This is a work in progress and a stable release is not yet available.__
-
 ###Installation
 crypt is not yet in the npm archives therefore download the zip file from GitHub and '*extract all*' into a folder.
 
@@ -20,25 +19,6 @@ git clone https://github.com/kelvin-martin/crypt.git
 ```
 
 This will install all the source files from the GitHub repo and setup a local git repo.
-
-To run the test suite you will need to install UnitJS into the test folder. From the command line cd into the 'test' folder and run '__*npm install*__'.  This will install unit.js into the 'node_module' subdirectory.
-
-To run the test suite from the test folder use: 
-```
-npm start or node test.js
-```
-
-To run the test suite from the crypt folder use: 
-```
-npm test or node ./test/test.js
-```
-
-###Testing
-The crypt package has been tested on:
-
-	1. Windows 10 64bit environment
-	2. Node v4.4.3 (stable build)
-	3. JUnit v2.0.0
 
 ###API
 A stable release is not yet available and changes to the API __will occur__.
