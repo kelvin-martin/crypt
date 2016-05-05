@@ -165,6 +165,35 @@ function test6() {
 		.string(decrypted).is(plain_text);	
 };
 
+function test7() {
+	console.log('Test for verify().');
+
+	var passPhrase = crypt.randomPassPhrase(32);
+	var encrypted = crypt.encrypt(plain_text, passPhrase);
+
+	test
+		.bool(crypt.verify(plain_text, encrypted, passPhrase))
+		.isTrue(crypt.verify(plain_text, encrypted, passPhrase));
+	test
+		.bool(crypt.verify(encrypted, plain_text, passPhrase))
+		.isFalse(crypt.verify(encrypted, plain_text, passPhrase));
+	test
+		.bool(crypt.verify(plain_text, encrypted, crypt.randomPassPhrase()))
+		.isFalse(crypt.verify(plain_text, encrypted, crypt.randomPassPhrase()));
+	test
+		.bool(crypt.verify("qwerty123456", encrypted, passPhrase))
+		.isFalse(crypt.verify("qwerty123456", encrypted, passPhrase));
+	test
+		.bool(crypt.verify("6755$322olZS", encrypted))
+		.isFalse(crypt.verify("6755$322olZS", encrypted));
+	test
+		.bool(crypt.verify("qfguuoPy12&^%56"))
+		.isFalse(crypt.verify("qfguuoPy12&^%56"));
+	test
+		.bool(crypt.verify())
+		.isFalse(crypt.verify());
+};
+
 // Run tests
 test1();
 test2();
@@ -172,4 +201,5 @@ test3();
 test4();
 test5();
 test6();
+test7();
 // End tests

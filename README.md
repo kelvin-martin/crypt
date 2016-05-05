@@ -5,7 +5,7 @@ Storing passwords in plain-text is not a good idea. crypt makes the storing of p
 
 crypt provides functions to generate a 'pass phrase' that can be used with the text or password to be encrypted. This pass phrase is then used to later validate the plain text password against the encrypted password. 
 
-Using Node's Advanced Encryption System AES256 symetrical algorithm for encryption and an option to use SHA256 for hashing the pass phrase crypt offer a strong cryptographic solution for password handling.
+Using Node's Advanced Encryption System AES256 symetrical algorithm for encryption and an option to use SHA256 for hashing the pass phrase, crypt offer a strong cryptographic solution for password handling.
 
 crypt only depends on Node's crypto library and has no other dependancies. UnitJS is used for testing but is not required to use crypt.
 
@@ -64,6 +64,9 @@ The current implementation uses Node's Advanced Encryption System AES256 algorit
 decrypt (text, passPhrase)
 ```
 Decrypts a block of previously encrypted text (__*string*__) using the supplied pass phrase (__*string*__) and returns a plain text (__*string*__) decryption. If an error occurs a null object is returned. Therefore, the return value sould always be tested for null. If a different pass phrase is used then the function will return null.
-
+```
+verify (text, encrypted, passPhrase)
+```
+Helper function that verifies the supplied text is the same as the encrypted text using the supplied pass phrase. Returns true (__*bool*__) if the the text is validated else returns false (__*bool*__). Returns false if any of the parameters are missing or the pass phrase was not used to encrypt the original text.
 ###License
 Crypt is freely distributable under the terms of the MIT license.

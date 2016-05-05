@@ -43,12 +43,7 @@ exports.postUser = function (name, oldPassword, newPassword) {
 	var found = false;
 	for (var i=0; i<users.length; i++) {
 		if (name === users[i].name) {		
-			var decrypted = crypt.decrypt(users[i].password, users[i].phrase);
-			if (!decrypted) {
-				console.log("Internal server error!");
-				break;	
-			}
-			if (decrypted === oldPassword) {
+			if (crypt.verify(oldPassword, users[i].password, users[i].phrase)) {
 				var passPhrase = crypt.randomPassPhrase(32);
 				var encryptedPassword = crypt.encrypt(newPassword,passPhrase);
 

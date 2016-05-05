@@ -59,3 +59,14 @@ exports.decrypt = function (text, passPhrase) {
 	    return null;
 	}
 };
+
+// Verifies (true or false) the plain text is the source 
+// of the encryted text using the given pass phrase.
+exports.verify = function (text, encrypted, passPhrase) {
+	var result = false;
+	var decrypted = this.decrypt (encrypted, passPhrase);
+	if (decrypted) {
+		result = (decrypted === text) ? true : false;
+	} 
+	return result;
+}
