@@ -5,6 +5,8 @@ Storing passwords in plain-text is not a good idea. crypt makes the storing of p
 
 crypt provides functions to generate a 'pass phrase' that can be used with the text or password to be encrypted. This pass phrase is then used to later validate the plain text password against the encrypted password. 
 
+The encrypted text and pass phrase are not combined and therefore can either be combined later for storage or stored seperately for increased security.
+
 Using Node's Advanced Encryption System AES256 symetrical algorithm for encryption and an option to use SHA256 for hashing the pass phrase, crypt offer a strong cryptographic solution for password handling.
 
 crypt only depends on Node's crypto library and has no other dependancies. UnitJS is used for testing but is not required to use crypt.

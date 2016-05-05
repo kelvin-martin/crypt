@@ -1,5 +1,6 @@
 // Example usage script for crypt.
 // Load from the Node shell
+'use strict';
 const crypt = require('../crypt.js');
 
 // User storage. In a real project this 
@@ -13,7 +14,7 @@ exports.getUserList = function () {
 		console.log("Password: " + users[i].password);
 		console.log("Phrase:   " + users[i].phrase);
 	}
-}
+};
 
 // Returns a user from the storage
 exports.getUser = function (name) {
@@ -25,7 +26,7 @@ exports.getUser = function (name) {
 		}
 	}
 	return user;
-}
+};
 
 // Creates a new user and saves the user to storage
 exports.putUser = function (name, password) {
@@ -36,7 +37,7 @@ exports.putUser = function (name, password) {
 	users.push({ "name": name, 
 				"password": encryptedPassword, 
 				"phrase": passPhrase });
-}
+};
 
 // Updates a user's password
 exports.postUser = function (name, oldPassword, newPassword) {
@@ -58,8 +59,8 @@ exports.postUser = function (name, oldPassword, newPassword) {
 			}
 		}
 	}
-	if (found == false) {
+	if (found === false) {
 		console.log("User: " + name + " not found!");
 		return;
 	}
-}
+};

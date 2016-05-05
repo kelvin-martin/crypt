@@ -1,6 +1,6 @@
 // Simple functions, using Node's crypto library, to encrypt and decrypt
 // blocks of text. This is especially suited for storage of passwords.
-
+'use strict'; 
 const crypto = require('crypto');
 
 // Advanced Encryption System AES256 is a symmetrical 
@@ -10,7 +10,7 @@ var algorithm = 'aes256';
 // Returns a random hex string that can be used as a pass phrase.
 // Takes an optional length parameter for the length of the pass phrase
 // length should be between 32 and 1024.
-exports.randomPassPhrase = function (length) {
+module.exports.randomPassPhrase = function (length) {
 	if (typeof length === 'undefined') {
     	length = 128;
   	} else if (length < 32) {
@@ -24,7 +24,7 @@ exports.randomPassPhrase = function (length) {
 
 // Returns a hash digest string using the supplied text
 // that can be used as a pass phrase.
-exports.hashPassPhrase = function (text) {
+module.exports.hashPassPhrase = function (text) {
 	const hash = crypto.createHash('sha256');
 	if (typeof text === 'undefined') {
 		text = this.randomPassPhrase();
@@ -35,7 +35,7 @@ exports.hashPassPhrase = function (text) {
 
 // Encrypts a block of text using the supplied pass phrase.
 // If an error occurs a null object is returned.
-exports.encrypt = function (text, passPhrase) {
+module.exports.encrypt = function (text, passPhrase) {
 	try {
 	    const cipher = crypto.createCipher(algorithm, passPhrase);
 	    var encrypted = cipher.update(text,'utf8','hex');
@@ -49,7 +49,7 @@ exports.encrypt = function (text, passPhrase) {
 // Decrypts a block of previously encrypted text using the 
 // supplied pass phrase.
 // If an error occurs a null object is returned.
-exports.decrypt = function (text, passPhrase) {
+module.exports.decrypt = function (text, passPhrase) {
 	try {
 		const decipher = crypto.createDecipher(algorithm, passPhrase);
 	    var decrypted = decipher.update(text,'hex','utf8');
@@ -62,11 +62,11 @@ exports.decrypt = function (text, passPhrase) {
 
 // Verifies (true or false) the plain text is the source 
 // of the encryted text using the given pass phrase.
-exports.verify = function (text, encrypted, passPhrase) {
+module.exports.verify = function (text, encrypted, passPhrase) {
 	var result = false;
 	var decrypted = this.decrypt (encrypted, passPhrase);
 	if (decrypted) {
 		result = (decrypted === text) ? true : false;
 	} 
 	return result;
-}
+};

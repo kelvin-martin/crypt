@@ -1,6 +1,6 @@
 // Test suite for crypt.
 // Run from 'test' subfolder
-
+'use strict';
 const crypt = require('../crypt.js');
 var test = require('unit.js'); 
 
@@ -12,7 +12,7 @@ var plain_text = "Finally, you should know that in JavaScript" +
 "an exception.2 Here's an example of using an error as an exception";
 
 function test1() {
-	console.log('Test for usage of randomPassPhrase(), encrypt() and decrypt().');
+	console.log('Test for randomPassPhrase(), encrypt() and decrypt().');
 
 	var passPhrase = crypt.randomPassPhrase();
 	var encrypted = crypt.encrypt(plain_text, passPhrase);
@@ -22,7 +22,6 @@ function test1() {
 		.string(encrypted).isNotEmpty();
 
 	var decrypted = crypt.decrypt(encrypted, passPhrase);
-
 	test
 		.value(decrypted).isString()
 		.string(decrypted).isNotEmpty()
@@ -57,9 +56,9 @@ function test3() {
 };
 
 function test4() {
-	console.log('Test for correct error return for invalid parameters for encrypt().');
+	console.log('Test for invalid parameters for encrypt().');
 	
-	var encrypted = crypt.encrypt(4, "afgfg4t5ghghb");
+	var encrypted = crypt.encrypt(4, 'afgfg4t5ghghb');
 	test
 		.value(encrypted).isNull();
 
@@ -67,11 +66,11 @@ function test4() {
 	test
 		.value(encrypted).isNull();
 	
-	encrypted = crypt.encrypt(plain_text, {"passphrase": "afgfg4t5ghghb"});
+	encrypted = crypt.encrypt(plain_text, {'passphrase': 'afgfg4t5ghghb'});
 	test
 		.value(encrypted).isNull();
 	
-	encrypted = crypt.encrypt(plain_text, "afgfg4t5ghghb");
+	encrypted = crypt.encrypt(plain_text, 'afgfg4t5ghghb');
 	test
 		.value(encrypted).isString()
 		.string(encrypted).isNotEmpty();
@@ -134,7 +133,7 @@ function test5() {
 function test6() {
 	console.log('Test for hashPassPhrase().');
 
-	var passPhrase = crypt.hashPassPhrase("asdh wueh467d76bcr8hfs");
+	var passPhrase = crypt.hashPassPhrase('asdh wueh467d76bcr8hfs');
 
 	test
 		.must(passPhrase).be.a.string();
@@ -142,23 +141,20 @@ function test6() {
 		.string(passPhrase).isNotEmpty()
 		.number(passPhrase.length).is(64); 
 
-	var passPhrase = crypt.hashPassPhrase();
-
+	passPhrase = crypt.hashPassPhrase();
 	test
 		.must(passPhrase).be.a.string();
 	test
 		.string(passPhrase).isNotEmpty()
 		.number(passPhrase.length).is(64);
 
-	passPhrase = crypt.hashPassPhrase("7bcghaeq53cdb4390b0a4aef");
+	passPhrase = crypt.hashPassPhrase('7bcghaeq53cdb4390b0a4aef');
 	var encrypted = crypt.encrypt(plain_text, passPhrase);
-	
 	test
 		.value(encrypted).isString()
 		.string(encrypted).isNotEmpty();
 
 	var decrypted = crypt.decrypt(encrypted, passPhrase);
-
 	test
 		.value(decrypted).isString()
 		.string(decrypted).isNotEmpty()
@@ -181,17 +177,36 @@ function test7() {
 		.bool(crypt.verify(plain_text, encrypted, crypt.randomPassPhrase()))
 		.isFalse(crypt.verify(plain_text, encrypted, crypt.randomPassPhrase()));
 	test
-		.bool(crypt.verify("qwerty123456", encrypted, passPhrase))
+		.bool(crypt.verify('qwerty123456', encrypted, passPhrase))
 		.isFalse(crypt.verify("qwerty123456", encrypted, passPhrase));
 	test
-		.bool(crypt.verify("6755$322olZS", encrypted))
-		.isFalse(crypt.verify("6755$322olZS", encrypted));
+		.bool(crypt.verify('6755$322olZS', encrypted))
+		.isFalse(crypt.verify('6755$322olZS', encrypted));
 	test
-		.bool(crypt.verify("qfguuoPy12&^%56"))
-		.isFalse(crypt.verify("qfguuoPy12&^%56"));
+		.bool(crypt.verify('qfguuoPy12&^%56'))
+		.isFalse(crypt.verify('qfguuoPy12&^%56'));
 	test
 		.bool(crypt.verify())
 		.isFalse(crypt.verify());
+};
+
+function test8() {
+	console.log('Test for rapid iterations.');
+	for (var i=0; i<50000; i++) {
+		var passPhrase = crypt.randomPassPhrase();
+		var encrypted = crypt.encrypt(plain_text+i, passPhrase);
+		if (i % 100 === 0)
+				process.stdout.write('.');
+		test
+			.value(encrypted).isString()
+			.string(encrypted).isNotEmpty();
+
+		var decrypted = crypt.decrypt(encrypted, passPhrase);
+		test
+			.value(decrypted).isString()
+			.string(decrypted).isNotEmpty()
+			.string(decrypted).is(plain_text+i);		
+	}
 };
 
 // Run tests
@@ -202,4 +217,5 @@ test4();
 test5();
 test6();
 test7();
+test8();
 // End tests
