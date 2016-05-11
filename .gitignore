@@ -1,3 +1,4 @@
 # exclude test/node_modules folder which contains
 # the UnitJS module used for testing.
 /test/node_modules/*
+npm-debug.log
